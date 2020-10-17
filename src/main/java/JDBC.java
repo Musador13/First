@@ -1,5 +1,3 @@
-import com.mysql.cj.jdbc.MysqlDataSource;
-
 import java.sql.*;
 
 /**
@@ -16,6 +14,7 @@ public class JDBC {
     static final String PASSWORD = "Musa89896616237";
 
     public static void main(String[] args) throws SQLException {
+
 
            /* MysqlDataSource dataSource = new MysqlDataSource();
             dataSource.setUser("root");
@@ -38,10 +37,6 @@ public class JDBC {
 
         connection = DriverManager
                 .getConnection(DATABASE_URL, USER, PASSWORD);
-
-        if (connection != null) {
-            System.out.println("Connect!");
-        }
 
         if (connection != null) {
 

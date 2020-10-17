@@ -20,12 +20,13 @@ public class Main {
     private static Logger logger;
     private static String dataFile = "src/main/resources/map.json";
     private static Scanner scanner;
-    private static StationIndex stationIndex;
+
 
     public static void main(String[] args) throws Exception {
 
         Document document = Jsoup.connect("https://coronavirus-control.ru/coronavirus-moscow/").userAgent("Chrome/86.0.4240.75 Safari/537.36").referrer("https://google.com").get();
         Elements listNews = document.select("div#coronatablerussia");
+
 
     final Integer[] count = {0};
     PrintWriter writer = new PrintWriter("data/file123.csv");
