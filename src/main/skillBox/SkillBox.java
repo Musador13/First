@@ -19,19 +19,19 @@ public class SkillBox {
         SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
 
         Session session = sessionFactory.openSession();
-        /*Course course = session.get(Course.class, 2);
-        System.out.println(course.getClass());*/
+        Course course = session.get(Course.class, 13);
+        System.out.println(course.getName());
 
-        PurchaseList pL = session.get(PurchaseList.class, 1);
-        System.out.println(pL.getCourseName());
+        PurchaseList pL = session.get(PurchaseList.class, 13);
+        System.out.println(pL.getPrice());
 
-        Students students = session.get(Students.class,12);
-        System.out.println(students.getAge());
+        Students students = session.get(Students.class,13);
+        System.out.println(students.getRegistration_date());
 
-        Subscriptions subscriptions = session.get(Subscriptions.class,11);
+        Subscriptions subscriptions = session.get(Subscriptions.class,13);
         System.out.println(subscriptions.getStudentId());
 
-        Teachers teachers = session.get(Teachers.class,22);
+        Teachers teachers = session.get(Teachers.class,13);
         System.out.println(teachers.getSalary());
 
         sessionFactory.close();
