@@ -1,43 +1,39 @@
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
 import java.sql.*;
 /**
  * @author Musa Dzhabirov
  */
 public class SkillBox {
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) {
 
-        Statement statement = null;
+        StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure("hibernate.cfg.xml").build();
+        Metadata metadata = new MetadataSources(registry).getMetadataBuilder().build();
+        SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
 
-        Connect connect = new Connect("root", "Musa89896616237", "usersdb");
-        connect.connect();
+        Session session = sessionFactory.openSession();
+        /*Course course = session.get(Course.class, 2);
+        System.out.println(course.getClass());*/
 
-        try {
-            statement = connect.connect().createStatement();
-            System.out.println("good");
+        PurchaseList pL = session.get(PurchaseList.class, 1);
+        System.out.println(pL.getCourseName());
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Students students = session.get(Students.class,12);
+        System.out.println(students.getAge());
 
+        Subscriptions subscriptions = session.get(Subscriptions.class,11);
+        System.out.println(subscriptions.getStudentId());
 
-        /*SELECT  distinct(pl.course_name) , (count(pl.course_name)/(max(month(pl.subscription_date))-min(month(pl.subscription_date)) + 1)) AS avg_purchase
-        FROM purchaselist AS pl
-        where year(pl.subscription_date) = 2018
-        group by pl.course_name;
-        */
-        String sql = ("select distinct(pl.course_name), (count(pl.course_name)/(max(month(pl.subscription_date))-min(month(pl.subscription_date)) + 1))  avg_purchase" +
-                " FROM purchaselist  pl" +
-                " where year(pl.subscription_date) = 2018" +
-                " group by pl.course_name;");
-        statement.executeQuery(sql);
-        ResultSet resultSet = statement.executeQuery(sql);
+        Teachers teachers = session.get(Teachers.class,22);
+        System.out.println(teachers.getSalary());
 
-        while (resultSet.next()) {
-            String courseName = resultSet.getString("course_name") + "\t" + resultSet.getString("avg_purchase");
-            System.out.println(courseName);
-        }
-
-        resultSet.close();
-        connect.disconnect();
+        sessionFactory.close();
     }
 }

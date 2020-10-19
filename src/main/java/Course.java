@@ -3,6 +3,9 @@ import javax.persistence.*;
 /**
  * @author Musa Dzhabirov
  */
+
+@Entity
+@Table(name = "Courses")
 public class Course {
 
     @Id
@@ -22,7 +25,7 @@ public class Course {
     @Column(name = "teacher_id")
     private int teacherId;
 
-    @Column (name = "student_count")
+    @Column (name = "students_count")
     private int studentsCount;
 
     private int price;
